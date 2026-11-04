@@ -16,7 +16,7 @@ import pandas as pd
 from docx import Document
 from docx.enum.section import WD_SECTION
 from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT, WD_TABLE_ALIGNMENT
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_COLOR_INDEX
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_COLOR_INDEX, WD_TAB_ALIGNMENT, WD_TAB_LEADER
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
@@ -509,9 +509,7 @@ for i, (k, val) in enumerate([("Autor", "Felipe Benaglia Nardini — RA 28804824
 R.quebra()
 par = doc.add_heading("Sumário", level=1)
 borda_inferior(par)
-toc = doc.add_paragraph()
-campo(toc, 'TOC \\o "1-2" \\h \\z \\u',
-      "Abra no Word e aceite atualizar os campos (ou clique aqui com o botão direito → Atualizar campo) para gerar o sumário.")
+toc = doc.add_paragraph()  # preenchido no fim, com preencher_sumario()
 
 # ---- cabeçalho e rodapé (a partir da 2ª seção)
 nova = doc.add_section(WD_SECTION.NEW_PAGE)
@@ -1056,7 +1054,112 @@ R.caixa(None, [
     f"Resultado esperado: Z = {num(int(sol['z']))} e folgas 0, 0 e {num(int(v['X5']))} (Tabela 16).   ☑ Conferido",
 ], mono=True)
 
+
+
+# ---- sumário preenchido
+def titulos_do_sumario():
+    """Títulos de nível 1 e 2 que vêm depois do sumário, na ordem do documento."""
+    lista, depois = [], False
+    for par in doc.paragraphs:
+        if par._p is toc._p:
+            depois = True
+            continue
+        nome = par.style.name if par.style is not None else ""
+        if depois and nome in ("Heading 1", "Heading 2") and par.text.strip():
+            lista.append((1 if nome == "Heading 1" else 2, par.text.strip()))
+    return lista
+
+
+def paginas_pelo_pdf(caminho_docx, titulos):
+    """Converte o .docx em PDF com o LibreOffice (se existir) e acha a página de cada título."""
+    import re
+    import shutil
+    import subprocess
+    import tempfile
+    soffice = shutil.which("soffice") or shutil.which("libreoffice")
+    if not soffice or not shutil.which("pdftotext"):
+        return None
+    with tempfile.TemporaryDirectory() as tmp:
+        subprocess.run([soffice, "--headless", "--convert-to", "pdf", "--outdir", tmp, str(caminho_docx)],
+                       capture_output=True, timeout=180)
+        pdf = Path(tmp) / (Path(caminho_docx).stem + ".pdf")
+        if not pdf.exists():
+            return None
+        texto = subprocess.run(["pdftotext", "-layout", str(pdf), "-"], capture_output=True, text=True).stdout
+    paginas = [re.sub(r"\s+", " ", pg) for pg in texto.split("\f")]
+    resultado, inicio = [], 2  # a busca começa depois da capa e do próprio sumário
+    for _, titulo in titulos:
+        alvo = re.sub(r"\s+", " ", titulo)
+        achou = None
+        for i in range(inicio, len(paginas)):
+            if alvo in paginas[i]:
+                achou = i
+                break
+        resultado.append(achou + 1 if achou is not None else None)
+        if achou is not None:
+            inicio = achou
+    return resultado
+
+
+ENTRADAS_SUMARIO = []
+
+
+def preencher_sumario(titulos, paginas):
+    """Escreve o sumário já preenchido dentro do campo TOC; o Word ainda pode atualizá-lo."""
+    for antigo in ENTRADAS_SUMARIO:
+        antigo.getparent().remove(antigo)
+    ENTRADAS_SUMARIO.clear()
+    for r in list(toc._p.findall(qn("w:r"))):
+        toc._p.remove(r)
+
+    def fld(par, tipo, instr=None):
+        r = OxmlElement("w:r")
+        f = OxmlElement("w:fldChar")
+        f.set(qn("w:fldCharType"), tipo)
+        r.append(f)
+        par._p.append(r)
+        if instr:
+            r2 = OxmlElement("w:r")
+            it = OxmlElement("w:instrText")
+            it.set(qn("xml:space"), "preserve")
+            it.text = instr
+            r2.append(it)
+            par._p.append(r2)
+
+    def formatar(par, nivel):
+        pf = par.paragraph_format
+        pf.left_indent = Cm(0 if nivel == 1 else 0.7)
+        pf.space_before = Pt(6 if nivel == 1 else 0)
+        pf.space_after = Pt(2)
+        pf.tab_stops.add_tab_stop(Cm(16), WD_TAB_ALIGNMENT.RIGHT, WD_TAB_LEADER.DOTS)
+
+    fld(toc, "begin", 'TOC \\o "1-2" \\h \\z \\u')
+    fld(toc, "separate")
+    atual, ancora = toc, toc._p
+    for k, ((nivel, titulo), pagina) in enumerate(zip(titulos, paginas)):
+        if k > 0:
+            novo = OxmlElement("w:p")
+            ancora.addnext(novo)
+            ENTRADAS_SUMARIO.append(novo)
+            ancora = novo
+            from docx.text.paragraph import Paragraph
+            atual = Paragraph(novo, toc._parent)
+        formatar(atual, nivel)
+        r = atual.add_run(titulo + "\t" + (str(pagina) if pagina else ""))
+        r.bold = nivel == 1
+        r.font.size = Pt(11 if nivel == 1 else 10.5)
+        if nivel == 1:
+            r.font.color.rgb = AZUL
+    fld(atual, "end")
+
+
 saida = BASE / "relatorio" / "Relatorio_Projeto_Final_PO.docx"
 saida.parent.mkdir(exist_ok=True)
+titulos = titulos_do_sumario()
+preencher_sumario(titulos, [None] * len(titulos))
 doc.save(saida)
+paginas = paginas_pelo_pdf(saida, titulos)
+if paginas:
+    preencher_sumario(titulos, paginas)
+    doc.save(saida)
 print("Relatório gerado em", saida)
