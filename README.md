@@ -1,5 +1,9 @@
 # Cloud Search · Sistema de Apoio à Decisão (AHP + Simplex)
 
+[![Abrir no Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://cloudsearch-po.streamlit.app)
+
+**Dashboard online:** https://cloudsearch-po.streamlit.app (abre no navegador, sem instalar nada)
+
 Projeto final da disciplina **Introdução à Pesquisa Operacional para Tomada de Decisão**
 (Fatec Araraquara · ADS · Prof. Dr. Carlos Ricardo Bifi).
 
@@ -18,7 +22,7 @@ O sistema resolve duas decisões encadeadas de uma startup fictícia, a **Cloud 
 | Capacidade máxima | Z = 16.800 req/s |
 | Gargalos | vCPU e RAM (folga 0); sobra de R$ 884/mês no orçamento |
 
-## Como rodar
+## Como rodar no seu computador
 
 ```bash
 python -m venv .venv
@@ -45,4 +49,4 @@ python gerar_relatorio.py       # gera relatorio/Relatorio_Projeto_Final_PO.docx
 O projeto foi desenvolvido com apoio do Claude (Anthropic). Todas as interações, os scripts gerados e as validações
 estão documentados no Apêndice A do relatório, conforme a Seção 6 da proposta.
 
-**Autor:** Felipe Benaglia Nardini — RA 2880482421038 · Repositório: https://github.com/Felpz016/Projeto_PL
+**Autor:** Felipe Benaglia Nardini — RA 2880482421038 · Dashboard: https://cloudsearch-po.streamlit.app · Repositório: https://github.com/Felpz016/Projeto_PL

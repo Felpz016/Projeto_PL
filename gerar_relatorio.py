@@ -489,11 +489,12 @@ rr.font.color.rgb = RGBColor(0x3A, 0x46, 0x56)
 for _ in range(4):
     doc.add_paragraph()
 
-info = doc.add_table(rows=4, cols=2)
+info = doc.add_table(rows=5, cols=2)
 sem_bordas(info)
 margens_celula(info, 0.08)
 for i, (k, val) in enumerate([("Autor", "Felipe Benaglia Nardini — RA 2880482421038"),
                               ("Docente", "Prof. Dr. Carlos Ricardo Bifi"),
+                              ("Dashboard online", "https://cloudsearch-po.streamlit.app"),
                               ("Repositório", "https://github.com/Felpz016/Projeto_PL"),
                               ("Local e data", "Araraquara-SP, novembro de 2026")]):
     c0, c1 = info.rows[i].cells
@@ -801,6 +802,9 @@ R.tabela("Organização do código", ["Arquivo", "Responsabilidade"], [
     ["gerar_relatorio.py", "Gera este relatório a partir dos mesmos motores"],
 ], larguras=[4.8, 11.0], alinhar_num=False)
 R.h2("4.2 Como usar")
+R.p("O dashboard está publicado no Streamlit Community Cloud e abre no navegador, sem instalação: "
+    "https://cloudsearch-po.streamlit.app. Se o app estiver sem acesso há alguns dias, ele mostra um botão para ser "
+    "reativado, o que leva cerca de 30 segundos. Para rodar no próprio computador:")
 R.lista(["Instalar as dependências: pip install -r requirements.txt",
          "Iniciar o app: streamlit run app.py",
          "Aba Dados: editar a pesquisa, ajustar o câmbio e buscar o preço da Azure ao vivo.",
@@ -909,10 +913,11 @@ P03 = ("faça oque for possivel no momento, estou em outro computador, quando vo
        "possivel” e, depois, “pode continuar a fazer tudo que faltava, mas agora nesse computador")
 P04 = "refaça o relatorio do projeto de um jeito mais bonito, e me mande as perguntas que preciso completar"
 P05 = "crie um repositorio para mim: https://github.com/Felpz016 (meu perfil)"
+P06 = "tem como eu colocar esse link no ar pra qualquer pessoa abrir e ver?"
 
 R.h1("5. Apêndice A — Governança e Rastreabilidade do Uso de IA")
-R.p("A IA generativa foi usada como copiloto em cinco momentos: planejamento, código do dashboard, pesquisa de dados, "
-    "redação do relatório e publicação do código no GitHub. Esta seção segue o modelo da Seção 6 da proposta: matriz de rastreabilidade, correções feitas "
+R.p("A IA generativa foi usada como copiloto em seis momentos: planejamento, código do dashboard, pesquisa de dados, "
+    "redação do relatório, publicação do código no GitHub e publicação do dashboard na internet. Esta seção segue o modelo da Seção 6 da proposta: matriz de rastreabilidade, correções feitas "
     "durante a validação e uma ficha detalhada para cada script gerado com apoio de IA.")
 R.h2("5.1 Matriz de rastreabilidade")
 R.tabela("Matriz de Rastreabilidade de IA",
@@ -934,6 +939,10 @@ R.tabela("Matriz de Rastreabilidade de IA",
     ["#05 Publicação", "Claude Opus 5.5 (Anthropic)", "Enviar o código para o GitHub",
      f"“{P05}”", "Commit do código no repositório github.com/Felpz016/Projeto_PL",
      "O autor criou o repositório na própria conta do GitHub; o envio usou o login dele."],
+    ["#06 Publicação", "Claude Opus 5.5 (Anthropic)", "Publicar o dashboard na internet",
+     f"“{P06}”", "Passo a passo do Streamlit Community Cloud; link no README, no repositório e neste relatório",
+     "O autor publicou o app na própria conta do Streamlit Community Cloud, a partir do repositório; "
+     "o link público foi incluído no README e neste relatório."],
 ], tamanho=7.5, alinhar_num=False, larguras=[2.0, 2.2, 2.4, 3.8, 2.7, 2.7])
 
 R.h2("5.2 Correções feitas durante a validação")
