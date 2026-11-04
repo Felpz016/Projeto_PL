@@ -1,0 +1,8 @@
+streamlit>=1.40
+pandas
+numpy
+plotly
+scipy
+requests
+matplotlib
+python-docx
