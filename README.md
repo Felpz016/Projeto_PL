@@ -49,4 +49,12 @@ python gerar_relatorio.py       # gera relatorio/Relatorio_Projeto_Final_PO.docx
 O projeto foi desenvolvido com apoio do Claude (Anthropic). Todas as interações, os scripts gerados e as validações
 estão documentados no Apêndice A do relatório, conforme a Seção 6 da proposta.
 
-**Autor:** Felipe Benaglia Nardini — RA 2880482421038 · Dashboard: https://cloudsearch-po.streamlit.app · Repositório: https://github.com/Felpz016/Projeto_PL
+## Integrantes
+
+| Nome | RA | GitHub |
+|---|---|---|
+| Felipe Benaglia Nardini | 2880482421038 | [@Felpz016](https://github.com/Felpz016) |
+| _(nome completo a informar)_ | _(a informar)_ | [@Yago0liveira](https://github.com/Yago0liveira) |
+| _(nome completo a informar)_ | _(a informar)_ | [@igorluna06](https://github.com/igorluna06) |
+
+Dashboard: https://cloudsearch-po.streamlit.app · Repositório: https://github.com/Felpz016/Projeto_PL
