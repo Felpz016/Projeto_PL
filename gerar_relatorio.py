@@ -492,9 +492,9 @@ for _ in range(4):
 info = doc.add_table(rows=5, cols=2)
 sem_bordas(info)
 margens_celula(info, 0.08)
-for i, (k, val) in enumerate([("Integrantes", "Felipe Benaglia Nardini — RA 2880482421038 (GitHub: Felpz016)\n"
-                               "[[Nome completo de Yago — RA a informar]] (GitHub: Yago0liveira)\n"
-                               "[[Nome completo de Igor — RA a informar]] (GitHub: igorluna06)"),
+for i, (k, val) in enumerate([("Integrantes", "Felipe Benaglia Nardini (GitHub: Felpz016)\n"
+                               "Yago Oliveira Silva Fernandes (GitHub: Yago0liveira)\n"
+                               "Igor Soarde de Luna (GitHub: igorluna06)"),
                               ("Docente", "Prof. Dr. Carlos Ricardo Bifi"),
                               ("Dashboard online", "https://cloudsearch-po.streamlit.app"),
                               ("Repositório", "https://github.com/Felpz016/Projeto_PL"),
@@ -934,7 +934,7 @@ R.tabela("Matriz de Rastreabilidade de IA",
      "Latência medida no computador de Felipe; preços e SLAs conferidos nas fontes oficiais (ver 5.2)."],
     ["#04 Documentação", "Claude Opus 5.5 (Anthropic)", "Gerar e formatar este relatório",
      f"“{P04}”", "gerar_relatorio.py e este documento",
-     "Felipe forneceu nome, RA e nome da startup e aprovou as premissas sugeridas (notas de suporte, "
+     "Felipe forneceu os nomes dos integrantes e o nome da startup e aprovou as premissas sugeridas (notas de suporte, "
      "julgamentos de Saaty, capacidades e limites do PL)."],
     ["#05 Publicação", "Claude Opus 5.5 (Anthropic)", "Enviar o código para o GitHub",
      f"“{P05}”", "Commit do código no repositório github.com/Felpz016/Projeto_PL",
@@ -995,9 +995,9 @@ R.h2("5.4 Declaração de uso de IA")
 R.p("Declaramos que as ferramentas de Inteligência Artificial listadas neste apêndice foram usadas como copiloto no "
     "planejamento, na programação do dashboard, na pesquisa de dados e na redação deste relatório, e que todas as "
     "interações relevantes estão documentadas acima.")
-for integrante in ["Felipe Benaglia Nardini — RA 2880482421038",
-                   "[[Nome completo de Yago — RA a informar]]",
-                   "[[Nome completo de Igor — RA a informar]]"]:
+for integrante in ["Felipe Benaglia Nardini",
+                   "Yago Oliveira Silva Fernandes",
+                   "Igor Soarde de Luna"]:
     doc.add_paragraph()
     assin = doc.add_paragraph("_____________________________________________")
     assin.alignment = WD_ALIGN_PARAGRAPH.CENTER

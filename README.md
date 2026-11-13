@@ -51,10 +51,10 @@ estão documentados no Apêndice A do relatório, conforme a Seção 6 da propos
 
 ## Integrantes
 
-| Nome | RA | GitHub |
-|---|---|---|
-| Felipe Benaglia Nardini | 2880482421038 | [@Felpz016](https://github.com/Felpz016) |
-| _(nome completo a informar)_ | _(a informar)_ | [@Yago0liveira](https://github.com/Yago0liveira) |
-| _(nome completo a informar)_ | _(a informar)_ | [@igorluna06](https://github.com/igorluna06) |
+| Nome | GitHub |
+|---|---|
+| Felipe Benaglia Nardini | [@Felpz016](https://github.com/Felpz016) |
+| Yago Oliveira Silva Fernandes | [@Yago0liveira](https://github.com/Yago0liveira) |
+| Igor Soarde de Luna | [@igorluna06](https://github.com/igorluna06) |
 
 Dashboard: https://cloudsearch-po.streamlit.app · Repositório: https://github.com/Felpz016/Projeto_PL
