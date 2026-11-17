@@ -492,7 +492,9 @@ for _ in range(4):
 info = doc.add_table(rows=5, cols=2)
 sem_bordas(info)
 margens_celula(info, 0.08)
-for i, (k, val) in enumerate([("Autor", "Felipe Benaglia Nardini — RA 2880482421038"),
+for i, (k, val) in enumerate([("Integrantes", "Felipe Benaglia Nardini (GitHub: Felpz016)\n"
+                               "Yago Oliveira Silva Fernandes (GitHub: Yago0liveira)\n"
+                               "Igor Soarde de Luna (GitHub: igorluna06)"),
                               ("Docente", "Prof. Dr. Carlos Ricardo Bifi"),
                               ("Dashboard online", "https://cloudsearch-po.streamlit.app"),
                               ("Repositório", "https://github.com/Felpz016/Projeto_PL"),
@@ -613,7 +615,7 @@ R.tabela("Critérios, classificação e justificativa",
           ["C4 IOPS", "Benefício ↑", "op/s", "Desempenho do disco padrão; limita bancos de dados e filas."],
           ["C5 Suporte", "Benefício ↑", "nota 1–5", "Qualidade do suporte técnico, medida por uma régua própria."]],
          larguras=[3.0, 2.2, 2.0, 8.6])
-R.p("A nota de suporte (1 a 5) foi atribuída pelo autor considerando cinco aspectos dos planos de suporte de cada "
+R.p("A nota de suporte (1 a 5) foi atribuída pela equipe considerando cinco aspectos dos planos de suporte de cada "
     "provedor: atendimento 24/7, suporte técnico incluído sem custo adicional, atendimento em português, canais de chat "
     "ou telefone e tempo de resposta garantido em contrato.")
 R.tabela("Matriz de decisão com os valores brutos",
@@ -650,7 +652,7 @@ R.tabela("Matriz normalizada Nij", ["Provedor"] + CURTOS,
 R.p("Células em verde indicam o melhor desempenho em cada critério (N = 1).", italico=True, tamanho=9, alinhar="esq")
 
 R.h2("2.4 Pesos dos critérios pelo AHP de Saaty")
-R.p("Julgamentos do autor: para uma startup em fase inicial, o custo é o critério mais importante (moderadamente mais "
+R.p("Julgamentos da equipe: para uma startup em fase inicial, o custo é o critério mais importante (moderadamente mais "
     "importante que latência e SLA; fortemente mais importante que IOPS e suporte). Latência e SLA têm a mesma importância "
     "entre si e são moderadamente mais importantes que IOPS e suporte, que empatam.")
 R.tabela("Matriz de comparação par a par A (Escala Fundamental de Saaty)",
@@ -699,7 +701,7 @@ R.tabela("Variáveis de decisão", ["Variável", "Significado", "Configuração"
          larguras=[1.6, 5.6, 2.9, 2.6, 2.6])
 R.p("Os custos vêm da tabela oficial da Oracle (US$ 0,025 por OCPU-hora e US$ 0,0015 por GB-hora; 1 OCPU = 2 vCPU): "
     "X1 = 1 OCPU + 8 GB = US$ 0,037/h ≈ R$ 148/mês; X2 = 2 OCPU + 32 GB = US$ 0,098/h ≈ R$ 391/mês.")
-R.p("As capacidades de 500 e 1.200 req/s são premissas de projeto estimadas pelo autor. O nó analítico tem o dobro de "
+R.p("As capacidades de 500 e 1.200 req/s são premissas de projeto estimadas pela equipe. O nó analítico tem o dobro de "
     "vCPU e quatro vezes a memória do microsserviço, mas processa consultas mais pesadas, por isso sua capacidade "
     "equivalente foi estimada em 2,4 vezes a do microsserviço, e não em 4 vezes. Em produção, esses valores seriam "
     "calibrados com um teste de carga (por exemplo, com as ferramentas k6 ou JMeter).")
@@ -922,24 +924,24 @@ R.tabela("Matriz de Rastreabilidade de IA",
          ["ID / Etapa", "IA e versão", "Objetivo", "Prompt (entrada exata)", "Saída gerada", "Auditoria e validação"], [
     ["#01 Planejamento", "Claude Opus 5.5 (Anthropic)", "Sugerir uma abordagem para o projeto",
      f"“{P01}”", "Sugestão do Cenário B (Cloud), dos 5 critérios e do modelo de PL",
-     "O autor escolheu o Cenário B e aprovou a abordagem."],
+     "Felipe escolheu o Cenário B e aprovou a abordagem."],
     ["#02 Etapas 1 e 2", "Claude Opus 5.5 (Anthropic)", "Gerar o dashboard e os motores de cálculo",
      f"“{P02}”", "app.py, motores/ahp.py e motores/simplex.py (Fichas 1 a 3)",
-     "Simplex comparado com o SciPy (resultados iguais). Teste de mesa refeito pelo autor (Apêndice B): os "
+     "Simplex comparado com o SciPy (resultados iguais). Teste de mesa refeito por Felipe (Apêndice B): os "
      "resultados conferem."],
     ["#03 Etapa 1", "Claude Opus 5.5 (Anthropic)", "Levantar preços, SLA e IOPS e medir a latência",
      f"“{P03}”", "dados/pesquisa_mercado.csv com as fontes da Tabela 2",
-     "Latência medida no computador do autor; preços e SLAs conferidos nas fontes oficiais (ver 5.2)."],
+     "Latência medida no computador de Felipe; preços e SLAs conferidos nas fontes oficiais (ver 5.2)."],
     ["#04 Documentação", "Claude Opus 5.5 (Anthropic)", "Gerar e formatar este relatório",
      f"“{P04}”", "gerar_relatorio.py e este documento",
-     "O autor forneceu nome, RA e nome da startup e aprovou as premissas sugeridas (notas de suporte, "
+     "Felipe forneceu os nomes dos integrantes e o nome da startup e aprovou as premissas sugeridas (notas de suporte, "
      "julgamentos de Saaty, capacidades e limites do PL)."],
     ["#05 Publicação", "Claude Opus 5.5 (Anthropic)", "Enviar o código para o GitHub",
      f"“{P05}”", "Commit do código no repositório github.com/Felpz016/Projeto_PL",
-     "O autor criou o repositório na própria conta do GitHub; o envio usou o login dele."],
+     "Felipe criou o repositório na própria conta do GitHub; o envio usou o login dele."],
     ["#06 Publicação", "Claude Opus 5.5 (Anthropic)", "Publicar o dashboard na internet",
      f"“{P06}”", "Passo a passo do Streamlit Community Cloud; link no README, no repositório e neste relatório",
-     "O autor publicou o app na própria conta do Streamlit Community Cloud, a partir do repositório; "
+     "Felipe publicou o app na própria conta do Streamlit Community Cloud, a partir do repositório; "
      "o link público foi incluído no README e neste relatório."],
 ], tamanho=7.5, alinhar_num=False, larguras=[2.0, 2.2, 2.4, 3.8, 2.7, 2.7])
 
@@ -968,7 +970,7 @@ ficha(1, "Etapa 1 (AHP de Saaty e Normalização)",
       "Módulo motores/ahp.py, com as funções normalizar_min_max, matriz_de_triangulo, calcular_ahp e ranking "
       "(código completo abaixo).",
       "Os resultados das funções foram conferidos com a memória de cálculo das Tabelas 5 a 9. O teste de mesa da "
-      "normalização (Google Cloud, critério Custo) e do peso do critério Custo foi refeito à mão pelo autor "
+      "normalização (Google Cloud, critério Custo) e do peso do critério Custo foi refeito à mão por Felipe "
       "(Apêndice B) e confere.",
       [("motores/ahp.py", "motores/ahp.py — código completo")])
 ficha(2, "Etapa 2 (Programação Linear e Simplex Tabular)",
@@ -977,7 +979,7 @@ ficha(2, "Etapa 2 (Programação Linear e Simplex Tabular)",
       f"“{P02}” (o código foi gerado junto com o protótipo do dashboard).",
       "Módulo motores/simplex.py, com a função resolver (código completo abaixo).",
       "O resultado (X1 = 24, X2 = 4, Z = 16.800) é idêntico ao do scipy.optimize.linprog. O teste de mesa do 1º "
-      "pivoteamento e a prova real da solução ótima foram refeitos à mão pelo autor (Apêndice B) e conferem.",
+      "pivoteamento e a prova real da solução ótima foram refeitos à mão por Felipe (Apêndice B) e conferem.",
       [("motores/simplex.py", "motores/simplex.py — código completo")])
 ficha(3, "Interface do Dashboard",
       "Construir a interface interativa com as abas Dados, AHP e Simplex, a busca de preço ao vivo da Azure e o painel "
@@ -990,20 +992,23 @@ ficha(3, "Interface do Dashboard",
       [("motores/precos.py", "motores/precos.py — código completo")])
 
 R.h2("5.4 Declaração de uso de IA")
-R.p("Declaro que as ferramentas de Inteligência Artificial listadas neste apêndice foram usadas como copiloto no "
+R.p("Declaramos que as ferramentas de Inteligência Artificial listadas neste apêndice foram usadas como copiloto no "
     "planejamento, na programação do dashboard, na pesquisa de dados e na redação deste relatório, e que todas as "
     "interações relevantes estão documentadas acima.")
-doc.add_paragraph()
-assin = doc.add_paragraph("_____________________________________________")
-assin.alignment = WD_ALIGN_PARAGRAPH.CENTER
-assin.paragraph_format.space_after = Pt(0)
-R.p("Felipe Benaglia Nardini — RA 2880482421038", alinhar="centro")
+for integrante in ["Felipe Benaglia Nardini",
+                   "Yago Oliveira Silva Fernandes",
+                   "Igor Soarde de Luna"]:
+    doc.add_paragraph()
+    assin = doc.add_paragraph("_____________________________________________")
+    assin.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    assin.paragraph_format.space_after = Pt(0)
+    R.p(integrante, alinhar="centro")
 
 # ---- 6. apêndice B: teste de mesa
 R.h1("6. Apêndice B — Teste de Mesa (Conferência Manual)")
 R.p("Este roteiro refaz à mão, com uma calculadora comum, quatro contas que o dashboard faz automaticamente. Se os "
     "resultados baterem com os valores esperados, os scripts gerados com apoio de IA estão corretos nesses pontos.")
-R.caixa(None, ["Conferido pelo autor em 04/11/2026: os quatro resultados refeitos na calculadora batem com os "
+R.caixa(None, ["Conferido por Felipe em 04/11/2026: os quatro resultados refeitos na calculadora batem com os "
                "valores esperados."], cor=VERDE, borda="2E7D4F")
 
 gc = "Google Cloud"
